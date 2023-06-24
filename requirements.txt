@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+whisper
+celery
+redis
+python-dotenv
+
+git+https://github.com/Suitox93/pytube@patch-1
