@@ -5,4 +5,5 @@ celery
 redis
 python-dotenv
 
+git+https://github.com/openai/whisper.git
 git+https://github.com/Suitox93/pytube@patch-1
