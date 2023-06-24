@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /requirements.txt
 
 # Установка зависимостей Python
-RUN pip install --no-cache-dir -r /requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r /requirements.txt
 
 # Создание директории приложения в контейнере
 RUN mkdir /app
