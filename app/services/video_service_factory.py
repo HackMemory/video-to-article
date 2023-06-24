@@ -7,8 +7,8 @@ class VideoServiceFactory:
         if "youtube.com" in video_url:
             service = YoutubeService(video_url)
             service.is_youtube = True
-            
+
             return service
-        # Добавьте здесь условия для других сервисов, если необходимо
+        # здесь условия для других сервисов, если необходимо
         else:
             raise ValueError("Unsupported video service")
