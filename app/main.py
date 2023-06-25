@@ -1,15 +1,20 @@
 from celery.result import AsyncResult
-from fastapi import FastAPI
 import uvicorn
 import tasks
 
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 
 app = FastAPI()
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/images", StaticFiles(directory="storage/picture"), name="images")
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/generate-article")
@@ -26,6 +31,11 @@ async def get_status(id: str):
         return {"status": task_result.state, "result": task_result.result}
     else:
         return {"status": task_result.state}
+    
+@app.delete("/task/{id}")
+async def stop_task(id: str):
+    tasks.celery_app.control.revoke(id, terminate=True)
+    return {"status": "STOPPED"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
