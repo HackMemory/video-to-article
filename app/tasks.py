@@ -1,6 +1,6 @@
 import time
 from celery import Celery
-from speech.recognizer import recognizer
+from speech.recognizer import Recognizer
 
 from services.video_service_factory import VideoServiceFactory
 
@@ -11,6 +11,7 @@ def process_article_generation(video_url):
     service = VideoServiceFactory.create_service(video_url)
     file = service.download_video()
 
+    recognizer = Recognizer()
     data = recognizer.transcribe(file)
     print(data)
     

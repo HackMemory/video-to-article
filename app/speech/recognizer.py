@@ -27,4 +27,4 @@ class Recognizer:
 
         return data
 
-recognizer = Recognizer()
+
