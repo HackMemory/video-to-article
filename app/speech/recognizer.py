@@ -11,7 +11,7 @@ class Recognizer:
     model = None
 
     def __init__(self):
-        self.model = whisper.load_model(config.whisper_model_name)
+        self.model = whisper.load_model(config.whisper_model_name, download_root=config.temp_folder_path)
 
     def transcribe(self, path):
         result = self.model.transcribe(path)

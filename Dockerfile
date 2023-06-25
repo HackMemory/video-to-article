@@ -1,6 +1,8 @@
 # Используем базовый образ Python
 FROM python:3.9
 
+RUN apt-get update && apt-get install ffmpeg -y
+
 # Установка переменной окружения для запуска в режиме совместимости
 ENV PYTHONUNBUFFERED 1
 
